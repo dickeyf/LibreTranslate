@@ -17,11 +17,7 @@ RUN pip3 install --no-cache-dir --upgrade pip && apt-get remove python3-pip --as
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
-RUN if [[ "$TARGETPLATFORM" = "linux/amd64" ]]; then \
-    pip3 install --no-cache-dir torch==1.12.0+cu116 -f https://download.pytorch.org/whl/torch_stable.html \
-    else \
-    pip3 install --no-cache-dir https://forums.developer.nvidia.com/t/pytorch-for-jetson/72048 \
-    fi
+RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then pip3 install --no-cache-dir torch==1.12.0+cu116 -f https://download.pytorch.org/whl/torch_stable.html;else;pip3 install --no-cache-dir https://forums.developer.nvidia.com/t/pytorch-for-jetson/72048;fi
 
 COPY . .
 
