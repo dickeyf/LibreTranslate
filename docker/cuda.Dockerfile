@@ -19,7 +19,7 @@ RUN pip3 install --no-cache-dir --upgrade pip && apt-get remove python3-pip --as
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
 RUN if [ "$TARGETPLATFORM" = "linux/arm64" ]; then \
-    pip3 install --no-cache-dir https://nvidia.box.com/shared/static/zvultzsmd4iuheykxy17s4l2n91ylpl8.whl; \
+    pip3 install --no-cache-dir https://developer.download.nvidia.cn/compute/redist/jp/v60/pytorch/torch-2.4.0a0+07cecf4168.nv24.05.14710581-cp310-cp310-linux_aarch64.whl; \
     else \
     pip3 install --no-cache-dir torch==1.12.0+cu116 -f https://download.pytorch.org/whl/torch_stable.html; \
     fi
