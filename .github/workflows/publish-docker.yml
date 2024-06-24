@@ -61,7 +61,7 @@ jobs:
         with:
           file: ./docker/cuda.Dockerfile
           platforms: linux/arm64
-          tags: ${{ env.REGISTRY }}/libretranslate:${{ env.TAG }}-cuda
+          tags: ${{ env.REGISTRY }}/dickeyf:${{ env.TAG }}-cuda
           push: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
