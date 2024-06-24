@@ -1,28 +1,20 @@
-FROM nvidia/cuda:12.4.1-devel-ubuntu20.04
+FROM dustynv/pytorch:2.1-r36.2.0
 
 ENV ARGOS_DEVICE_TYPE cuda
 ARG TARGETPLATFORM
 ARG with_models=false
-ARG models=""
+ARG models="en,ru"
 
 WORKDIR /app
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -qq \
-    && apt-get -qqq install --no-install-recommends -y libicu-dev libaspell-dev libcairo2 libcairo2-dev pkg-config gcc g++ python3.8-dev python3-pip libpython3.8-dev\
+    && apt-get -qqq install --no-install-recommends -y libicu-dev libaspell-dev libcairo2 libcairo2-dev pkg-config gcc g++ \
     && apt-get upgrade --assume-yes \
     && apt-get clean \
     && rm -rf /var/lib/apt
 
-RUN pip3 install --no-cache-dir --upgrade pip && apt-get remove python3-pip --assume-yes
-
 RUN ln -s /usr/bin/python3 /usr/bin/python
-
-RUN if [ "$TARGETPLATFORM" = "linux/arm64" ]; then \
-    pip3 install --no-cache-dir https://developer.download.nvidia.cn/compute/redist/jp/v60/pytorch/torch-2.4.0a0+07cecf4168.nv24.05.14710581-cp310-cp310-linux_aarch64.whl; \
-    else \
-    pip3 install --no-cache-dir torch==1.12.0+cu116 -f https://download.pytorch.org/whl/torch_stable.html; \
-    fi
 
 COPY . .
 
