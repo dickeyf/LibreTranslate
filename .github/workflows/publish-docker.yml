@@ -60,7 +60,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           file: ./docker/cuda.Dockerfile
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/arm64
           tags: ${{ env.REGISTRY }}/libretranslate:${{ env.TAG }}-cuda
           push: true
           cache-from: type=gha
