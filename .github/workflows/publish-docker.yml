@@ -61,10 +61,9 @@ jobs:
         with:
           file: ./docker/cuda.Dockerfile
           platforms: linux/arm64
-          tags: ${{ env.REGISTRY }}/dickeyf:${{ env.TAG }}-cuda
+          tags: ${{ env.REGISTRY }}/${{ env.REPO }}:${{ github.sha }} , ${{ env.REGISTRY }}/${{ env.REPO }}:latest
           push: true
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: with_models=true
-        env:
-          TAG: ${{ startsWith(github.ref, 'refs/tags/') && steps.get-variables.outputs.version || 'latest' }}
+
